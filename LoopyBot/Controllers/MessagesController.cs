@@ -34,7 +34,7 @@ namespace LoopyBot
                 await Conversation.SendAsync(activity, () => new GreetingDialog());
             }
             else
-            {
+            { 
                 HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
