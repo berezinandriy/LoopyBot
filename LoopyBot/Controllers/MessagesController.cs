@@ -31,7 +31,11 @@ namespace LoopyBot
                 //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 //await connector.Conversations.ReplyToActivityAsync(reply);
 
-                await Conversation.SendAsync(activity, () => new GreetingDialog());
+                //#2
+                //await Conversation.SendAsync(activity, () => new GreetingDialog());
+
+                //#3
+                await Conversation.SendAsync(activity, () =>  HotelBotDialog.dialog);
             }
             else
             { 
