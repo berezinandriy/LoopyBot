@@ -9,6 +9,7 @@ using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
 using Microsoft.Bot.Builder.Dialogs;
 using LoopyBot.Dialogs;
+using LoopyBot.Models;
 
 namespace LoopyBot
 {
@@ -35,7 +36,10 @@ namespace LoopyBot
                 //await Conversation.SendAsync(activity, () => new GreetingDialog());
 
                 //#3
-                await Conversation.SendAsync(activity, () =>  HotelBotDialog.dialog);
+                //await Conversation.SendAsync(activity, () =>  HotelBotDialog.dialog);
+
+                //#4
+                await Conversation.SendAsync(activity, MakeLuisDialog);
             }
             else
             { 
@@ -43,6 +47,11 @@ namespace LoopyBot
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
+        }
+
+        private IDialog<RoomReservation> MakeLuisDialog()
+        {
+            return Chain.From(()=> new LUISDialog(RoomReservation.BuildForm));
         }
 
         private Activity HandleSystemMessage(Activity message)
